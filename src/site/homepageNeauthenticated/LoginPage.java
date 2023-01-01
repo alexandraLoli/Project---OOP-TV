@@ -11,7 +11,6 @@ import java.util.ArrayList;
 
 public class LoginPage extends Site {
     public static LoginPage instance;
-    private OnPageStrategy onPageStrategy;
 
     public LoginPage() {
 
@@ -44,7 +43,12 @@ public class LoginPage extends Site {
     }
 
     @Override
-    public void back() {
-        super.back();
+    public void back(ArrayList<OutputData> outputData, ActionsInput actionsInput) {
+        super.back(outputData, actionsInput);
+    }
+
+    @Override
+    public void subscribe(ArrayList<OutputData> outputData, ActionsInput actionsInput) {
+        outputData.add(new OutputData());
     }
 }

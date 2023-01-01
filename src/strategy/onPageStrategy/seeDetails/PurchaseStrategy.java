@@ -9,6 +9,11 @@ import strategy.onPageStrategy.OnPageStrategy;
 public class PurchaseStrategy implements OnPageStrategy {
     @Override
     public OutputData onPage(ActionsInput actionsInput) {
+        for (Movie movie : UserLoggedIn.getInstance().getCurrentUser().getPurchasedMovies()) {
+            if (movie.getName().equals(UserLoggedIn.getInstance().getCurrentMovie().getName())){
+                return new OutputData();
+            }
+        }
         for (Movie movie : UserLoggedIn.getInstance().getCurrentMovieList()) {
             if (movie.getName().equals(UserLoggedIn.getInstance().getCurrentMovie().getName())) {
                 if (UserLoggedIn.getInstance().getCurrentUser().getCredentials().getAccountType().equals("standard")) {

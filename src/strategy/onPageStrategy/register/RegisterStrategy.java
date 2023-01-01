@@ -31,6 +31,7 @@ public class RegisterStrategy implements OnPageStrategy {
         UsersDataBase.getInstance().addToUsersDB(user);
         UserLoggedIn.getInstance().setCurrentUser(user);
         UserLoggedIn.getInstance().updateCurrentMovieList();
+        UserLoggedIn.getInstance().getPagesAccessed().add("homepage authenticated");
         UserLoggedIn.getInstance().setCurrentPage("homepage authenticated");
         return new OutputData(
                 null,

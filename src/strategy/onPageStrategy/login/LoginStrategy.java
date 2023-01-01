@@ -19,6 +19,7 @@ public class LoginStrategy implements OnPageStrategy {
                 UserLoggedIn.getInstance().setCurrentUser(user);
                 UserLoggedIn.getInstance().updateCurrentMovieList();
                 UserLoggedIn.getInstance().setCurrentPage("homepage authenticated");
+                UserLoggedIn.getInstance().getPagesAccessed().add("homepage authenticated");
                 return new OutputData(
                         null,
                         UserLoggedIn.getInstance().getCurrentUser(),

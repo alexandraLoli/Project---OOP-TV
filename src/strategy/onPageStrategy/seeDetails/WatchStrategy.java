@@ -9,6 +9,11 @@ import strategy.onPageStrategy.OnPageStrategy;
 public class WatchStrategy implements OnPageStrategy {
     @Override
     public OutputData onPage(ActionsInput actionsInput) {
+        for (Movie movie : UserLoggedIn.getInstance().getCurrentUser().getWatchedMovies()) {
+            if (UserLoggedIn.getInstance().getCurrentMovie().getName().equals(movie.getName())) {
+                return null;
+            }
+        }
         for (Movie movie : UserLoggedIn.getInstance().getCurrentUser().getPurchasedMovies()) {
             if (movie.getName().equals(UserLoggedIn.getInstance().getCurrentMovie().getName())) {
                 UserLoggedIn.getInstance().getCurrentUser().getWatchedMovies().add(movie);

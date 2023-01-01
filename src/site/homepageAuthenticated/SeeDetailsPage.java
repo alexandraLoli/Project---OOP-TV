@@ -1,8 +1,12 @@
 package site.homepageAuthenticated;
 
+import entity.Movie;
+import entity.User;
 import fileio.input.ActionsInput;
 import fileio.output.OutputData;
+import fileio.output.OutputUser;
 import site.Site;
+import site.UserLoggedIn;
 import strategy.changePageStrategy.ChangePageStrategy;
 import strategy.changePageStrategy.PageLoginStrategy;
 import strategy.changePageStrategy.PageMoviesStrategy;
@@ -12,14 +16,13 @@ import strategy.onPageStrategy.seeDetails.LikeStrategy;
 import strategy.onPageStrategy.seeDetails.PurchaseStrategy;
 import strategy.onPageStrategy.seeDetails.RateStrategy;
 import strategy.onPageStrategy.seeDetails.WatchStrategy;
+import strategy.specialActionStrategy.SubscribeStrategy;
 
 import java.util.ArrayList;
 
 public class SeeDetailsPage extends Site {
 
     public static SeeDetailsPage instance;
-    private ChangePageStrategy changePageStrategy;
-    private OnPageStrategy onPageStrategy;
 
     public SeeDetailsPage() {
 
@@ -55,7 +58,10 @@ public class SeeDetailsPage extends Site {
         if (this.onPageStrategy == null) {
             outputData.add(new OutputData());
         } else {
-            outputData.add(this.onPageStrategy.onPage(actionsInput));
+            OutputData output = this.onPageStrategy.onPage(actionsInput);
+            if (output != null) {
+                outputData.add(output);
+            }
         }
     }
 
@@ -80,12 +86,24 @@ public class SeeDetailsPage extends Site {
             OutputData output = this.changePageStrategy.changePage(actionsInput);
             if (output != null) {
                 outputData.add(output);
+                if (output.getError() == null) {
+                    UserLoggedIn.getInstance().getPagesAccessed().add(pageName);
+                }
             }
         }
     }
 
     @Override
-    public void back() {
-        super.back();
+    public void back(ArrayList<OutputData> outputData, ActionsInput actionsInput) {
+        super.back(outputData, actionsInput);
+    }
+
+    @Override
+    public void subscribe(ArrayList<OutputData> outputData, ActionsInput actionsInput) {
+        this.specialActionStrategy = new SubscribeStrategy();
+        OutputData output = this.specialActionStrategy.action(actionsInput);
+        if (output != null) {
+            outputData.add(output);
+        }
     }
 }

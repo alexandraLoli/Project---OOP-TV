@@ -1,6 +1,7 @@
 package fileio.output;
 
 import entity.Movie;
+import entity.Notifications;
 import entity.User;
 import entity.UserCredentials;
 import site.UserLoggedIn;
@@ -16,6 +17,12 @@ public final class OutputData {
         error = "Error";
         currentMoviesList = new ArrayList<>();
         currentUser = null;
+    }
+
+    public OutputData(final User currentUser) {
+        this.error = null;
+        this.currentUser = setUser(currentUser);
+        this.currentMoviesList = null;
     }
 
     public OutputData(final String error,
@@ -82,7 +89,8 @@ public final class OutputData {
                 UserLoggedIn.getInstance().getCurrentUser().getPurchasedMovies(),
                 UserLoggedIn.getInstance().getCurrentUser().getWatchedMovies(),
                 UserLoggedIn.getInstance().getCurrentUser().getLikedMovies(),
-                UserLoggedIn.getInstance().getCurrentUser().getRatedMovies()
+                UserLoggedIn.getInstance().getCurrentUser().getRatedMovies(),
+                UserLoggedIn.getInstance().getCurrentUser().getNotifications()
 
         );
     }

@@ -1,16 +1,23 @@
 package entity;
 
-import java.util.ArrayList;
+import observer.Observable;
 
-public final class User {
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public final class User implements Observable {
 
     private final UserCredentials credentials;
     private Integer tokensCount;
     private Integer numFreePremiumMovies;
-    private ArrayList<Movie> purchasedMovies;
-    private ArrayList<Movie> watchedMovies;
-    private ArrayList<Movie> likedMovies;
-    private ArrayList<Movie> ratedMovies;
+    private final ArrayList<Movie> purchasedMovies;
+    private final ArrayList<Movie> watchedMovies;
+    private final ArrayList<Movie> likedMovies;
+    private final ArrayList<Movie> ratedMovies;
+    private final ArrayList<Notifications> notifications;
+    private final ArrayList<String> subscribedGenres;
+
+    private final HashMap<String, Integer> genresTop;
 
     public User(final UserCredentials credentials,
                 final Integer tokensCount,
@@ -22,6 +29,9 @@ public final class User {
         this.watchedMovies = new ArrayList<>();
         this.likedMovies = new ArrayList<>();
         this.ratedMovies = new ArrayList<>();
+        this.notifications = new ArrayList<>();
+        this.subscribedGenres = new ArrayList<>();
+        this.genresTop = new HashMap<>();
     }
 
 
@@ -53,6 +63,18 @@ public final class User {
         return watchedMovies;
     }
 
+    public ArrayList<Notifications> getNotifications() {
+        return notifications;
+    }
+
+    public ArrayList<String> getSubscribedGenres() {
+        return subscribedGenres;
+    }
+
+    public HashMap<String, Integer> getGenresTop() {
+        return genresTop;
+    }
+
     public void setTokensCount(final Integer tokensCount) {
         this.tokensCount = tokensCount;
     }
@@ -60,6 +82,8 @@ public final class User {
     public void setNumFreePremiumMovies(final Integer numFreePremiumMovies) {
         this.numFreePremiumMovies = numFreePremiumMovies;
     }
+
+
 
     @Override
     public String toString() {
@@ -71,6 +95,32 @@ public final class User {
                 + ", watchedMovies=" + watchedMovies
                 + ", likedMovies=" + likedMovies
                 + ", ratedMovies=" + ratedMovies
+                + ", notifications=" + notifications
+                + ", subscribedGenres=" + subscribedGenres
                 + '}';
+    }
+
+    @Override
+    public void notify(final String movieName,
+                       final String message) {
+        this.notifications.add(
+                new Notifications(
+                        movieName,
+                        message
+                )
+        );
+    }
+
+    @Override
+    public void update(final Movie movie) {
+        if (this.credentials.getAccountType().equals("standard")) {
+            this.tokensCount = this.tokensCount + 2;
+        } else {
+            this.numFreePremiumMovies = this.numFreePremiumMovies + 1;
+        }
+        this.purchasedMovies.remove(movie);
+        this.watchedMovies.remove(movie);
+        this.likedMovies.remove(movie);
+        this.ratedMovies.remove(movie);
     }
 }

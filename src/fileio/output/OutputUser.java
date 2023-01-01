@@ -1,6 +1,7 @@
 package fileio.output;
 
 import entity.Movie;
+import entity.Notifications;
 import entity.UserCredentials;
 
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ public final class OutputUser {
     private final ArrayList<OutputMovie> watchedMovies;
     private final ArrayList<OutputMovie> likedMovies;
     private final ArrayList<OutputMovie> ratedMovies;
-
+    private final ArrayList<Notifications> notifications;
 
     public OutputUser(final UserCredentials credentials,
                       final Integer tokensCount,
@@ -22,7 +23,8 @@ public final class OutputUser {
                       final ArrayList<Movie> purchasedMovies,
                       final ArrayList<Movie> watchedMovies,
                       final ArrayList<Movie> likedMovies,
-                      final ArrayList<Movie> ratedMovies) {
+                      final ArrayList<Movie> ratedMovies,
+                      final ArrayList<Notifications> notifications) {
         this.credentials = credentials;
         this.tokensCount = tokensCount;
         this.numFreePremiumMovies = numFreePremiumMovies;
@@ -30,6 +32,7 @@ public final class OutputUser {
         this.watchedMovies = setMovieList(watchedMovies);
         this.likedMovies = setMovieList(likedMovies);
         this.ratedMovies = setMovieList(ratedMovies);
+        this.notifications = setNotifications(notifications);
     }
 
     public Integer getNumFreePremiumMovies() {
@@ -60,6 +63,10 @@ public final class OutputUser {
         return watchedMovies;
     }
 
+    public ArrayList<Notifications> getNotifications() {
+        return notifications;
+    }
+
     /**
      * @param movieList
      * @return
@@ -84,6 +91,20 @@ public final class OutputUser {
         }
         return  movie;
     }
+    private ArrayList<Notifications> setNotifications(ArrayList<Notifications> notifications) {
+        ArrayList<Notifications> not = new ArrayList<Notifications>();
+        if (notifications != null) {
+            for (Notifications notif : notifications) {
+                not.add(
+                        new Notifications(
+                                notif.getMovieName(),
+                                notif.getMessage()
+                        )
+                );
+            }
+        }
+        return not;
+    }
 
     @Override
     public String toString() {
@@ -95,6 +116,7 @@ public final class OutputUser {
                 + ", watchedMovies=" + watchedMovies
                 + ", likedMovies=" + likedMovies
                 + ", ratedMovies=" + ratedMovies
+                + ", notifications=" + notifications
                 + '}';
     }
 }

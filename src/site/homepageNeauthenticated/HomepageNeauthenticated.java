@@ -3,6 +3,7 @@ package site.homepageNeauthenticated;
 import fileio.input.ActionsInput;
 import fileio.output.OutputData;
 import site.Site;
+import site.UserLoggedIn;
 import strategy.changePageStrategy.ChangePageStrategy;
 import strategy.changePageStrategy.PageLoginStrategy;
 import strategy.changePageStrategy.PageRegisterStrategy;
@@ -11,7 +12,6 @@ import java.util.ArrayList;
 
 public class HomepageNeauthenticated extends Site {
     public static HomepageNeauthenticated instance;
-    private ChangePageStrategy changePageStrategy;
 
     public HomepageNeauthenticated() {
 
@@ -40,6 +40,7 @@ public class HomepageNeauthenticated extends Site {
         if (this.changePageStrategy == null) {
             outputData.add(new OutputData());
         } else {
+            UserLoggedIn.getInstance().getPagesAccessed().add(pageName);
             this.changePageStrategy.changePage(actionsInput);
         }
     }
@@ -50,7 +51,12 @@ public class HomepageNeauthenticated extends Site {
     }
 
     @Override
-    public void back() {
-        super.back();
+    public void back(ArrayList<OutputData> outputData, ActionsInput actionsInput) {
+        super.back(outputData, actionsInput);
+    }
+
+    @Override
+    public void subscribe(ArrayList<OutputData> outputData, ActionsInput actionsInput) {
+        outputData.add(new OutputData());
     }
 }

@@ -10,6 +10,9 @@ public final class ActionsInput {
     private String feature;
     private Integer count;
     private Integer rate;
+    private String subscribedGenre;
+    private MovieInput addedMovie;
+    private String deletedMovie;
 
     public ActionsInput() {
 
@@ -51,6 +54,18 @@ public final class ActionsInput {
         return rate;
     }
 
+    public String getSubscribedGenre() {
+        return subscribedGenre;
+    }
+
+    public MovieInput getAddedMovie() {
+        return addedMovie;
+    }
+
+    public String getDeletedMovie() {
+        return deletedMovie;
+    }
+
     public void setType(final String type) {
         this.type = type;
     }
@@ -85,6 +100,18 @@ public final class ActionsInput {
 
     public void setRate(final Integer rate) {
         this.rate = rate;
+    }
+
+    public void setSubscribedGenre(String subscribedGenre) {
+        this.subscribedGenre = subscribedGenre;
+    }
+
+    public void setAddedMovie(MovieInput addedMovie) {
+        this.addedMovie = addedMovie;
+    }
+
+    public void setDeletedMovie(String deletedMovie) {
+        this.deletedMovie = deletedMovie;
     }
 
     @Override

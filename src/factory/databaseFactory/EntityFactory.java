@@ -4,14 +4,23 @@ import entity.Movie;
 import entity.User;
 import fileio.input.MovieInput;
 import fileio.input.UserInput;
-import fileio.output.OutputMovie;
 
 public class EntityFactory {
-    public User createUser(UserInput user) {
+    /**
+     * Converts UserInput to User
+     * @param user
+     * @return the user
+     */
+    public User createUser(final UserInput user) {
         return null;
     }
 
-    public Movie createMovie(MovieInput movie) {
+    /**
+     * Converts MovieInput to Movie
+     * @param movie
+     * @return the movie
+     */
+    public Movie createMovie(final MovieInput movie) {
         return null;
     }
 }

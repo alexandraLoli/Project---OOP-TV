@@ -14,10 +14,12 @@ public final class UserLoggedIn {
 
     private String currentPage;
     private Movie currentMovie;
+    private ArrayList<String> pagesAccessed;
 
     public UserLoggedIn() {
         currentPage = "homepage neauthenticated";
         currentMovieList = new ArrayList<>();
+        pagesAccessed = new ArrayList<>();
     }
 
     static {
@@ -48,12 +50,12 @@ public final class UserLoggedIn {
         return currentMovieList;
     }
 
-    public void setCurrentMovieList(final ArrayList<Movie> currentMovieList) {
-        this.currentMovieList = currentMovieList;
-    }
-
     public String getCurrentPage() {
         return currentPage;
+    }
+
+    public ArrayList<String> getPagesAccessed() {
+        return pagesAccessed;
     }
 
     public void setCurrentPage(final String currentPage) {

@@ -1,10 +1,11 @@
 package entity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
-public final class Movie{
+public final class Movie {
     private final String name;
-    private final Integer year;
+    private final String year;
     private final Integer duration;
     private final ArrayList<String> genres;
     private final ArrayList<String> actors;
@@ -12,10 +13,10 @@ public final class Movie{
     private Integer numLikes;
     private Double rating;
     private Integer numRatings;
-    private final ArrayList<Integer> ratings;
+    private final HashMap<User, Integer> ratings;
 
     public Movie(final String name,
-                 final Integer year,
+                 final String year,
                  final Integer duration,
                  final ArrayList<String> genres,
                  final ArrayList<String> actors,
@@ -29,7 +30,7 @@ public final class Movie{
         this.numLikes = 0;
         this.rating = Double.valueOf(0);
         this.numRatings = 0;
-        this.ratings = new ArrayList<>();
+        this.ratings = new HashMap<>();
     }
 
     public String getName() {
@@ -52,7 +53,7 @@ public final class Movie{
         return duration;
     }
 
-    public Integer getYear() {
+    public String getYear() {
         return year;
     }
 
@@ -68,7 +69,7 @@ public final class Movie{
         return rating;
     }
 
-    public ArrayList<Integer> getRatings() {
+    public HashMap<User, Integer> getRatings() {
         return ratings;
     }
 

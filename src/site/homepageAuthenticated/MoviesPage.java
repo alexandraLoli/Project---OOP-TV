@@ -3,6 +3,7 @@ package site.homepageAuthenticated;
 import fileio.input.ActionsInput;
 import fileio.output.OutputData;
 import site.Site;
+import site.UserLoggedIn;
 import strategy.changePageStrategy.ChangePageStrategy;
 import strategy.changePageStrategy.PageLogoutStrategy;
 import strategy.changePageStrategy.PageMoviesStrategy;
@@ -16,8 +17,6 @@ import java.util.ArrayList;
 public class MoviesPage extends Site {
 
     public static MoviesPage instance;
-    private ChangePageStrategy changePageStrategy;
-    private OnPageStrategy onPageStrategy;
 
     public MoviesPage() {
 
@@ -52,6 +51,9 @@ public class MoviesPage extends Site {
             OutputData output = this.changePageStrategy.changePage(actionsInput);
             if (output != null) {
                 outputData.add(output);
+                if (output.getError() == null) {
+                    UserLoggedIn.getInstance().getPagesAccessed().add(pageName);
+                }
             }
         }
     }
@@ -77,7 +79,12 @@ public class MoviesPage extends Site {
     }
 
     @Override
-    public void back() {
-        super.back();
+    public void back(ArrayList<OutputData> outputData, ActionsInput actionsInput) {
+        super.back(outputData, actionsInput);
+    }
+
+    @Override
+    public void subscribe(ArrayList<OutputData> outputData, ActionsInput actionsInput) {
+        outputData.add(new OutputData());
     }
 }

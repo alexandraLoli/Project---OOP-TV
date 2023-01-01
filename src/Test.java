@@ -86,7 +86,7 @@ class TestType {
     }
 }
 
-public final class Test {
+    public final class Test {
     private static final String IN_FOLDER = "in/";
     private static final String REF_FOLDER = "ref/";
     private static final String CHECKER_RESOURCES_FOLDER = "checker/resources/";
