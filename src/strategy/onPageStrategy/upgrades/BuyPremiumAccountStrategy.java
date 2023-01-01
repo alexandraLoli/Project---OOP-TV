@@ -5,9 +5,9 @@ import fileio.output.OutputData;
 import site.UserLoggedIn;
 import strategy.onPageStrategy.OnPageStrategy;
 
-public class BuyPremiumAccountStrategy implements OnPageStrategy {
+public final class BuyPremiumAccountStrategy implements OnPageStrategy {
     @Override
-    public OutputData onPage(ActionsInput actionsInput) {
+    public OutputData onPage(final ActionsInput actionsInput) {
         int myTokens = UserLoggedIn.getInstance().getCurrentUser().getTokensCount();
         if (myTokens >= 10) {
             myTokens -= 10;

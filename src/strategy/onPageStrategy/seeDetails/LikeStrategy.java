@@ -6,9 +6,9 @@ import fileio.output.OutputData;
 import site.UserLoggedIn;
 import strategy.onPageStrategy.OnPageStrategy;
 
-public class LikeStrategy implements OnPageStrategy {
+public final class LikeStrategy implements OnPageStrategy {
     @Override
-    public OutputData onPage(ActionsInput actionsInput) {
+    public OutputData onPage(final ActionsInput actionsInput) {
         for (Movie movie : UserLoggedIn.getInstance().getCurrentUser().getWatchedMovies()) {
             if (movie.getName().equals(UserLoggedIn.getInstance().getCurrentMovie().getName())) {
                 movie.setNumLikes(movie.getNumLikes() + 1);

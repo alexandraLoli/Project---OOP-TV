@@ -3,14 +3,12 @@ package site.homepageNeauthenticated;
 import fileio.input.ActionsInput;
 import fileio.output.OutputData;
 import site.Site;
-import site.UserLoggedIn;
-import strategy.onPageStrategy.OnPageStrategy;
 import strategy.onPageStrategy.login.LoginStrategy;
 
 import java.util.ArrayList;
 
-public class LoginPage extends Site {
-    public static LoginPage instance;
+public final class LoginPage extends Site {
+    private static LoginPage instance;
 
     public LoginPage() {
 
@@ -25,7 +23,9 @@ public class LoginPage extends Site {
     }
 
     @Override
-    public void onPage(String feature, ActionsInput actionsInput, ArrayList<OutputData> outputData) {
+    public void onPage(final String feature,
+                       final ActionsInput actionsInput,
+                       final ArrayList<OutputData> outputData) {
         switch (feature) {
             case "login":
                 this.onPageStrategy = new LoginStrategy();
@@ -43,12 +43,14 @@ public class LoginPage extends Site {
     }
 
     @Override
-    public void back(ArrayList<OutputData> outputData, ActionsInput actionsInput) {
+    public void back(final ArrayList<OutputData> outputData,
+                     final ActionsInput actionsInput) {
         super.back(outputData, actionsInput);
     }
 
     @Override
-    public void subscribe(ArrayList<OutputData> outputData, ActionsInput actionsInput) {
+    public void subscribe(final ArrayList<OutputData> outputData,
+                          final ActionsInput actionsInput) {
         outputData.add(new OutputData());
     }
 }

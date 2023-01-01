@@ -4,5 +4,10 @@ import fileio.input.ActionsInput;
 import fileio.output.OutputData;
 
 public interface ChangePageStrategy {
-    OutputData changePage (ActionsInput actionsInput);
+    /**
+     * Method used to change page
+     * @param actionsInput
+     * @return
+     */
+    OutputData changePage(ActionsInput actionsInput);
 }

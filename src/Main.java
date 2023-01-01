@@ -2,7 +2,6 @@ import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import database.DataBase;
-import database.UsersDataBase;
 import fileio.input.InputData;
 import fileio.output.OutputData;
 import site.Site;
@@ -13,7 +12,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Main {
-    public static void main(String[] args) {
+    /**
+     * Read values, write values and is the entry to site
+     * @param args store inputPath and outputPath
+     */
+    public static void main(final String[] args) {
         String inputPath = args[0];
         String outputPath = args[1];
 

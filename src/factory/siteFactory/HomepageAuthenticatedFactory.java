@@ -1,10 +1,9 @@
 package factory.siteFactory;
 
-import fileio.output.OutputData;
 import site.Site;
 import site.homepageAuthenticated.HomepageAuthenticated;
 
-public class HomepageAuthenticatedFactory extends SiteFactory{
+public final class HomepageAuthenticatedFactory extends SiteFactory {
 
     @Override
     public Site getPage() {

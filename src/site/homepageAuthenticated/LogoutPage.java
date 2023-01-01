@@ -6,9 +6,9 @@ import site.Site;
 
 import java.util.ArrayList;
 
-public class LogoutPage extends Site {
+public final class LogoutPage extends Site {
 
-    public static LogoutPage instance;
+    private static LogoutPage instance;
 
     public LogoutPage() {
 
@@ -23,12 +23,14 @@ public class LogoutPage extends Site {
     }
 
     @Override
-    public void back(ArrayList<OutputData> outputData, ActionsInput actionsInput) {
+    public void back(final ArrayList<OutputData> outputData,
+                     final ActionsInput actionsInput) {
         super.back(outputData, actionsInput);
     }
 
     @Override
-    public void subscribe(ArrayList<OutputData> outputData, ActionsInput actionsInput) {
+    public void subscribe(final ArrayList<OutputData> outputData,
+                          final ActionsInput actionsInput) {
         outputData.add(new OutputData());
     }
 }

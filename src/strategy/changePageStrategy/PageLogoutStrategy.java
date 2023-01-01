@@ -4,9 +4,9 @@ import fileio.input.ActionsInput;
 import fileio.output.OutputData;
 import site.UserLoggedIn;
 
-public class PageLogoutStrategy implements ChangePageStrategy{
+public final class PageLogoutStrategy implements ChangePageStrategy {
     @Override
-    public OutputData changePage(ActionsInput actionsInput) {
+    public OutputData changePage(final ActionsInput actionsInput) {
         UserLoggedIn.getInstance().reset();
         return null;
     }

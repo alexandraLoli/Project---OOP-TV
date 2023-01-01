@@ -4,18 +4,16 @@ import fileio.input.ActionsInput;
 import fileio.output.OutputData;
 import site.Site;
 import site.UserLoggedIn;
-import strategy.changePageStrategy.ChangePageStrategy;
 import strategy.changePageStrategy.PageLogoutStrategy;
 import strategy.changePageStrategy.PageMoviesStrategy;
-import strategy.onPageStrategy.OnPageStrategy;
 import strategy.onPageStrategy.upgrades.BoyTokensStrategy;
 import strategy.onPageStrategy.upgrades.BuyPremiumAccountStrategy;
 
 import java.util.ArrayList;
 
-public class UpgradesPage extends Site {
+public final class UpgradesPage extends Site {
 
-    public static UpgradesPage instance;
+    private static UpgradesPage instance;
 
     public UpgradesPage() {
 
@@ -30,7 +28,9 @@ public class UpgradesPage extends Site {
     }
 
     @Override
-    public void changePage(String pageName, ActionsInput actionsInput, ArrayList<OutputData> outputData) {
+    public void changePage(final String pageName,
+                           final ActionsInput actionsInput,
+                           final ArrayList<OutputData> outputData) {
         switch (pageName) {
             case "movies":
                 this.changePageStrategy = new PageMoviesStrategy();
@@ -53,7 +53,9 @@ public class UpgradesPage extends Site {
     }
 
     @Override
-    public void onPage(String feature, ActionsInput actionsInput, ArrayList<OutputData> outputData) {
+    public void onPage(final String feature,
+                       final ActionsInput actionsInput,
+                       final ArrayList<OutputData> outputData) {
         switch (feature) {
             case "buy premium account":
                 this.onPageStrategy = new BuyPremiumAccountStrategy();
@@ -65,9 +67,9 @@ public class UpgradesPage extends Site {
                 this.onPageStrategy = null;
         }
 
-        if (this.onPageStrategy == null)
+        if (this.onPageStrategy == null) {
             outputData.add(new OutputData());
-        else {
+        } else {
             OutputData output = this.onPageStrategy.onPage(actionsInput);
             if (output != null) {
                 outputData.add(output);
@@ -76,12 +78,14 @@ public class UpgradesPage extends Site {
     }
 
     @Override
-    public void back(ArrayList<OutputData> outputData, ActionsInput actionsInput) {
+    public void back(final ArrayList<OutputData> outputData,
+                     final ActionsInput actionsInput) {
         super.back(outputData, actionsInput);
     }
 
     @Override
-    public void subscribe(ArrayList<OutputData> outputData, ActionsInput actionsInput) {
+    public void subscribe(final ArrayList<OutputData> outputData,
+                          final ActionsInput actionsInput) {
         outputData.add(new OutputData());
     }
 }

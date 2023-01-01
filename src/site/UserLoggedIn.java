@@ -34,7 +34,7 @@ public final class UserLoggedIn {
         return currentUser;
     }
 
-    public void setCurrentMovie(Movie currentMovie) {
+    public void setCurrentMovie(final Movie currentMovie) {
         this.currentMovie = currentMovie;
     }
 

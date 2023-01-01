@@ -1,17 +1,12 @@
 package site.homepageAuthenticated;
 
-import entity.Movie;
-import entity.User;
 import fileio.input.ActionsInput;
 import fileio.output.OutputData;
-import fileio.output.OutputUser;
 import site.Site;
 import site.UserLoggedIn;
-import strategy.changePageStrategy.ChangePageStrategy;
 import strategy.changePageStrategy.PageLoginStrategy;
 import strategy.changePageStrategy.PageMoviesStrategy;
 import strategy.changePageStrategy.PageUpgradesStrategy;
-import strategy.onPageStrategy.OnPageStrategy;
 import strategy.onPageStrategy.seeDetails.LikeStrategy;
 import strategy.onPageStrategy.seeDetails.PurchaseStrategy;
 import strategy.onPageStrategy.seeDetails.RateStrategy;
@@ -20,9 +15,9 @@ import strategy.specialActionStrategy.SubscribeStrategy;
 
 import java.util.ArrayList;
 
-public class SeeDetailsPage extends Site {
+public final class SeeDetailsPage extends Site {
 
-    public static SeeDetailsPage instance;
+    private static SeeDetailsPage instance;
 
     public SeeDetailsPage() {
 
@@ -37,7 +32,9 @@ public class SeeDetailsPage extends Site {
     }
 
     @Override
-    public void onPage(String feature, ActionsInput actionsInput, ArrayList<OutputData> outputData) {
+    public void onPage(final String feature,
+                       final ActionsInput actionsInput,
+                       final ArrayList<OutputData> outputData) {
         switch (feature) {
             case "purchase":
                 this.onPageStrategy = new PurchaseStrategy();
@@ -66,7 +63,9 @@ public class SeeDetailsPage extends Site {
     }
 
     @Override
-    public void changePage(String pageName,ActionsInput actionsInput, ArrayList<OutputData> outputData) {
+    public void changePage(final String pageName,
+                           final ActionsInput actionsInput,
+                           final ArrayList<OutputData> outputData) {
         switch (pageName) {
             case "movies":
                 this.changePageStrategy = new PageMoviesStrategy();
@@ -94,12 +93,14 @@ public class SeeDetailsPage extends Site {
     }
 
     @Override
-    public void back(ArrayList<OutputData> outputData, ActionsInput actionsInput) {
+    public void back(final ArrayList<OutputData> outputData,
+                     final ActionsInput actionsInput) {
         super.back(outputData, actionsInput);
     }
 
     @Override
-    public void subscribe(ArrayList<OutputData> outputData, ActionsInput actionsInput) {
+    public void subscribe(final ArrayList<OutputData> outputData,
+                          final ActionsInput actionsInput) {
         this.specialActionStrategy = new SubscribeStrategy();
         OutputData output = this.specialActionStrategy.action(actionsInput);
         if (output != null) {

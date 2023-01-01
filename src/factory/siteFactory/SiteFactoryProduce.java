@@ -1,7 +1,12 @@
 package factory.siteFactory;
 
 public class SiteFactoryProduce {
-    public static SiteFactory getFactory(String type) {
+    /**
+     * Return a specific factory to get a page later
+     * @param type for page type
+     * @return needed factory
+     */
+    public static SiteFactory getFactory(final String type) {
         if ("homepage authenticated".equals(type)) {
             return new HomepageAuthenticatedFactory();
         } else if ("homepage neauthenticated".equals(type)) {

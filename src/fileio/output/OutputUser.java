@@ -91,8 +91,9 @@ public final class OutputUser {
         }
         return  movie;
     }
-    private ArrayList<Notifications> setNotifications(ArrayList<Notifications> notifications) {
-        ArrayList<Notifications> not = new ArrayList<Notifications>();
+    private ArrayList<Notifications> setNotifications(
+            final ArrayList<Notifications> notifications) {
+        ArrayList<Notifications> not = new ArrayList<>();
         if (notifications != null) {
             for (Notifications notif : notifications) {
                 not.add(

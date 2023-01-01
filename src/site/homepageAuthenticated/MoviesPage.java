@@ -4,19 +4,17 @@ import fileio.input.ActionsInput;
 import fileio.output.OutputData;
 import site.Site;
 import site.UserLoggedIn;
-import strategy.changePageStrategy.ChangePageStrategy;
 import strategy.changePageStrategy.PageLogoutStrategy;
 import strategy.changePageStrategy.PageMoviesStrategy;
 import strategy.changePageStrategy.PageSeeDetailsStrategy;
-import strategy.onPageStrategy.OnPageStrategy;
 import strategy.onPageStrategy.movies.FilterStrategy;
 import strategy.onPageStrategy.movies.SearchStrategy;
 
 import java.util.ArrayList;
 
-public class MoviesPage extends Site {
+public final class MoviesPage extends Site {
 
-    public static MoviesPage instance;
+    private static MoviesPage instance;
 
     public MoviesPage() {
 
@@ -31,7 +29,9 @@ public class MoviesPage extends Site {
     }
 
     @Override
-    public void changePage(String pageName, ActionsInput actionsInput, ArrayList<OutputData> outputData) {
+    public void changePage(final String pageName,
+                           final ActionsInput actionsInput,
+                           final ArrayList<OutputData> outputData) {
         switch (pageName) {
             case "see details":
                 this.changePageStrategy = new PageSeeDetailsStrategy();
@@ -59,7 +59,9 @@ public class MoviesPage extends Site {
     }
 
     @Override
-    public void onPage(String feature, ActionsInput actionsInput, ArrayList<OutputData> outputData) {
+    public void onPage(final String feature,
+                       final ActionsInput actionsInput,
+                       final ArrayList<OutputData> outputData) {
         switch (feature) {
             case "search":
                 this.onPageStrategy = new SearchStrategy();
@@ -79,12 +81,14 @@ public class MoviesPage extends Site {
     }
 
     @Override
-    public void back(ArrayList<OutputData> outputData, ActionsInput actionsInput) {
+    public void back(final ArrayList<OutputData> outputData,
+                     final ActionsInput actionsInput) {
         super.back(outputData, actionsInput);
     }
 
     @Override
-    public void subscribe(ArrayList<OutputData> outputData, ActionsInput actionsInput) {
+    public void subscribe(final ArrayList<OutputData> outputData,
+                          final ActionsInput actionsInput) {
         outputData.add(new OutputData());
     }
 }

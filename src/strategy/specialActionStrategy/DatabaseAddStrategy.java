@@ -2,19 +2,17 @@ package strategy.specialActionStrategy;
 
 import database.MoviesDataBase;
 import database.UsersDataBase;
-import entity.Movie;
 import entity.User;
 import factory.databaseFactory.EntityFactory;
 import factory.databaseFactory.EntityFactoryProduce;
-import factory.databaseFactory.MovieFactory;
 import fileio.input.ActionsInput;
 import fileio.input.MovieInput;
 import fileio.output.OutputData;
 import observer.UsersToNotify;
 
-public class DatabaseAddStrategy implements SpecialActionStrategy{
+public final class DatabaseAddStrategy implements SpecialActionStrategy {
     @Override
-    public OutputData action(ActionsInput actionsInput) {
+    public OutputData action(final ActionsInput actionsInput) {
         MovieInput movieToAdd = actionsInput.getAddedMovie();
         for (int i = 0; i < MoviesDataBase.getInstance().getMovies().size(); i++) {
             if (movieToAdd.getName().equals(
@@ -27,7 +25,7 @@ public class DatabaseAddStrategy implements SpecialActionStrategy{
         return null;
     }
 
-    private void addMovie(MovieInput movieToAdd) {
+    private void addMovie(final MovieInput movieToAdd) {
         EntityFactory movieFactory = EntityFactoryProduce.getFactory("movie");
         MoviesDataBase.getInstance().addToMoviesDB(movieFactory.createMovie(movieToAdd));
 

@@ -8,9 +8,9 @@ import fileio.output.OutputData;
 import site.UserLoggedIn;
 import strategy.onPageStrategy.OnPageStrategy;
 
-public class RegisterStrategy implements OnPageStrategy {
+public final class RegisterStrategy implements OnPageStrategy {
     @Override
-    public OutputData onPage(ActionsInput actionsInput) {
+    public OutputData onPage(final ActionsInput actionsInput) {
         String name = actionsInput.getCredentials().getName();
         for (User user : UsersDataBase.getInstance().getUsers()) {
             if (user.getCredentials().getName().equals(name)) {

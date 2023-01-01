@@ -4,9 +4,9 @@ import fileio.input.ActionsInput;
 import fileio.output.OutputData;
 import site.UserLoggedIn;
 
-public class SubscribeStrategy implements SpecialActionStrategy{
+public final class SubscribeStrategy implements SpecialActionStrategy {
     @Override
-    public OutputData action(ActionsInput actionsInput) {
+    public OutputData action(final ActionsInput actionsInput) {
         String subscribedGenre = actionsInput.getSubscribedGenre();
         for (String i : UserLoggedIn.getInstance().getCurrentUser().getSubscribedGenres()) {
             if (i.equals(subscribedGenre)) {
@@ -15,7 +15,8 @@ public class SubscribeStrategy implements SpecialActionStrategy{
         }
         for (String i : UserLoggedIn.getInstance().getCurrentMovie().getGenres()) {
             if (i.equals(subscribedGenre)) {
-                UserLoggedIn.getInstance().getCurrentUser().getSubscribedGenres().add(subscribedGenre);
+                UserLoggedIn.getInstance()
+                        .getCurrentUser().getSubscribedGenres().add(subscribedGenre);
                 return null;
             }
         }

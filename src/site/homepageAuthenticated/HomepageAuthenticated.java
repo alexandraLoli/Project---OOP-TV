@@ -4,15 +4,14 @@ import fileio.input.ActionsInput;
 import fileio.output.OutputData;
 import site.Site;
 import site.UserLoggedIn;
-import strategy.changePageStrategy.ChangePageStrategy;
 import strategy.changePageStrategy.PageLogoutStrategy;
 import strategy.changePageStrategy.PageMoviesStrategy;
 import strategy.changePageStrategy.PageUpgradesStrategy;
 
 import java.util.ArrayList;
 
-public class HomepageAuthenticated extends Site {
-    public static HomepageAuthenticated instance;
+public final class HomepageAuthenticated extends Site {
+    private static HomepageAuthenticated instance;
 
     public HomepageAuthenticated() {
 
@@ -27,7 +26,9 @@ public class HomepageAuthenticated extends Site {
     }
 
     @Override
-    public void changePage(String pageName, ActionsInput actionsInput, ArrayList<OutputData> outputData) {
+    public void changePage(final String pageName,
+                           final ActionsInput actionsInput,
+                           final ArrayList<OutputData> outputData) {
         switch (pageName) {
             case "movies":
                 this.changePageStrategy = new PageMoviesStrategy();
@@ -54,17 +55,21 @@ public class HomepageAuthenticated extends Site {
     }
 
     @Override
-    public void onPage(String feature, ActionsInput actionsInput, ArrayList<OutputData> outputData) {
+    public void onPage(final String feature,
+                       final ActionsInput actionsInput,
+                       final ArrayList<OutputData> outputData) {
         outputData.add(new OutputData());
     }
 
     @Override
-    public void back(ArrayList<OutputData> outputData, ActionsInput actionsInput) {
+    public void back(final ArrayList<OutputData> outputData,
+                     final ActionsInput actionsInput) {
         super.back(outputData, actionsInput);
     }
 
     @Override
-    public void subscribe(ArrayList<OutputData> outputData, ActionsInput actionsInput) {
+    public void subscribe(final ArrayList<OutputData> outputData,
+                          final ActionsInput actionsInput) {
         outputData.add(new OutputData());
     }
 }

@@ -7,9 +7,9 @@ import fileio.output.OutputData;
 import site.UserLoggedIn;
 import strategy.onPageStrategy.OnPageStrategy;
 
-public class SearchStrategy implements OnPageStrategy {
+public final class SearchStrategy implements OnPageStrategy {
     @Override
-    public OutputData onPage(ActionsInput actionsInput) {
+    public OutputData onPage(final ActionsInput actionsInput) {
         String startsWith = actionsInput.getStartsWith();
 
         for (Movie movie : MoviesDataBase.getInstance().getMovies()) {

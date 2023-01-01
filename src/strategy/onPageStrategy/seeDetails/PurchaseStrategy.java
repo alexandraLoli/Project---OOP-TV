@@ -6,17 +6,18 @@ import fileio.output.OutputData;
 import site.UserLoggedIn;
 import strategy.onPageStrategy.OnPageStrategy;
 
-public class PurchaseStrategy implements OnPageStrategy {
+public final class PurchaseStrategy implements OnPageStrategy {
     @Override
-    public OutputData onPage(ActionsInput actionsInput) {
+    public OutputData onPage(final ActionsInput actionsInput) {
         for (Movie movie : UserLoggedIn.getInstance().getCurrentUser().getPurchasedMovies()) {
-            if (movie.getName().equals(UserLoggedIn.getInstance().getCurrentMovie().getName())){
+            if (movie.getName().equals(UserLoggedIn.getInstance().getCurrentMovie().getName())) {
                 return new OutputData();
             }
         }
         for (Movie movie : UserLoggedIn.getInstance().getCurrentMovieList()) {
             if (movie.getName().equals(UserLoggedIn.getInstance().getCurrentMovie().getName())) {
-                if (UserLoggedIn.getInstance().getCurrentUser().getCredentials().getAccountType().equals("standard")) {
+                if (UserLoggedIn.getInstance()
+                        .getCurrentUser().getCredentials().getAccountType().equals("standard")) {
                     if (!standardAccount(movie)) {
                         return new OutputData();
                     } else {
@@ -42,7 +43,12 @@ public class PurchaseStrategy implements OnPageStrategy {
         return new OutputData();
     }
 
-    private boolean premiumAccount(Movie movie) {
+    /**
+     * Method used when a premium user buys a movie
+     * @param movie
+     * @return
+     */
+    private boolean premiumAccount(final Movie movie) {
         if (UserLoggedIn.getInstance().getCurrentUser().getNumFreePremiumMovies()
                 >= 1) {
             int premium = UserLoggedIn.getInstance().getCurrentUser()
@@ -66,7 +72,12 @@ public class PurchaseStrategy implements OnPageStrategy {
         }
     }
 
-    public boolean standardAccount(Movie movie) {
+    /**
+     * Method used when a standard user buys a movie
+     * @param movie
+     * @return
+     */
+    public boolean standardAccount(final Movie movie) {
         if (UserLoggedIn.getInstance().getCurrentUser().getTokensCount() >= 2) {
             int myTokens = UserLoggedIn.getInstance().getCurrentUser().getTokensCount()
                     - 2;

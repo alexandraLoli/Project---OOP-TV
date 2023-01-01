@@ -1,9 +1,6 @@
 package site;
 
-import database.MoviesDataBase;
 import entity.Movie;
-import entity.Notifications;
-import entity.User;
 import factory.siteFactory.SiteFactoryProduce;
 import fileio.input.ActionsInput;
 import fileio.input.InputData;
@@ -22,6 +19,12 @@ public class Site {
     public ChangePageStrategy changePageStrategy;
     public OnPageStrategy onPageStrategy;
     public SpecialActionStrategy specialActionStrategy;
+
+    /**
+     * Verify each action and call the corresponding method
+     * @param outputData
+     * @param inputData
+     */
     public static void useSite(final ArrayList<OutputData> outputData,
                                final InputData inputData) {
         for (ActionsInput actionsInput : inputData.getActions()) {
@@ -55,7 +58,8 @@ public class Site {
             }
         }
         if (UserLoggedIn.getInstance().getCurrentUser() != null) {
-            if (UserLoggedIn.getInstance().getCurrentUser().getCredentials().getAccountType().equals("premium")) {
+            if (UserLoggedIn.getInstance().getCurrentUser().getCredentials().getAccountType()
+                    .equals("premium")) {
                 recommend();
                 outputData.add(new OutputData(
                         UserLoggedIn.getInstance().getCurrentUser()
@@ -64,15 +68,35 @@ public class Site {
         }
     }
 
-    public void changePage(String pageName, ActionsInput actionsInput, ArrayList<OutputData> outputData) {
+    /**
+     * Method used to change page
+     * @param pageName
+     * @param actionsInput
+     * @param outputData
+     */
+    public void changePage(final String pageName,
+                           final ActionsInput actionsInput,
+                           final ArrayList<OutputData> outputData) {
 
     }
 
-    public void onPage(String feature, ActionsInput actionsInput, ArrayList<OutputData> outputData) {
+    /**
+     * Method used to do OnPage actions
+     * @param feature
+     * @param actionsInput
+     * @param outputData
+     */
+    public void onPage(final String feature,
+                       final ActionsInput actionsInput,
+                       final ArrayList<OutputData> outputData) {
 
     }
 
-    public void back(ArrayList<OutputData> outputData, ActionsInput actionsInput) {
+    /**
+     * Method used to go back with a page
+     */
+    public void back(final ArrayList<OutputData> outputData,
+                     final ActionsInput actionsInput) {
         if (UserLoggedIn.getInstance().getCurrentUser() != null) {
             String previousPage = UserLoggedIn.getInstance().getPagesAccessed().get(
                     UserLoggedIn.getInstance().getPagesAccessed().size() - 2
@@ -116,11 +140,23 @@ public class Site {
         }
     }
 
-    public void subscribe (ArrayList<OutputData> outputData, ActionsInput actionsInput) {
+    /**
+     * Method used to subscribe to a genre
+     * @param outputData
+     * @param actionsInput
+     */
+    public void subscribe(final ArrayList<OutputData> outputData,
+                           final ActionsInput actionsInput) {
 
     }
 
-    public void database(ArrayList<OutputData> outputData, ActionsInput actionsInput) {
+    /**
+     * Method used to add or delete movies from Database
+     * @param outputData
+     * @param actionsInput
+     */
+    public void database(final ArrayList<OutputData> outputData,
+                         final ActionsInput actionsInput) {
         switch (actionsInput.getFeature()) {
             case "add":
                 this.specialActionStrategy = new DatabaseAddStrategy();
@@ -137,18 +173,23 @@ public class Site {
         }
     }
 
+    /**
+     * Method used to send recommendations
+     */
     public static void recommend() {
         UserLoggedIn.getInstance().updateCurrentMovieList();
         for (Movie movie : UserLoggedIn.getInstance().getCurrentUser().getLikedMovies()) {
             for (String genre : movie.getGenres()) {
                 boolean ok = false;
-                for (Map.Entry<String, Integer> i : UserLoggedIn.getInstance().getCurrentUser().getGenresTop().entrySet()) {
+                for (Map.Entry<String, Integer> i : UserLoggedIn.getInstance()
+                        .getCurrentUser().getGenresTop().entrySet()) {
                     if (i.getKey().equals(genre)) {
                         ok = true;
-                        UserLoggedIn.getInstance().getCurrentUser().getGenresTop().put(genre, i.getValue() + 1);
+                        UserLoggedIn.getInstance().getCurrentUser()
+                                .getGenresTop().put(genre, i.getValue() + 1);
                     }
                 }
-                if (!ok){
+                if (!ok) {
                     UserLoggedIn.getInstance().getCurrentUser().getGenresTop().put(genre, 1);
                 }
             }
@@ -161,10 +202,12 @@ public class Site {
         } else {
             Comparator<Integer> compareByLikes = (Integer i1, Integer i2) -> i1.compareTo(i2);
             Comparator<String> compareByName = (String s1, String s2) -> s1.compareTo(s2);
-            LinkedHashMap<String, Integer> sortedMap = UserLoggedIn.getInstance().getCurrentUser().getGenresTop().entrySet().stream()
+            LinkedHashMap<String, Integer> sortedMap = UserLoggedIn.getInstance()
+                    .getCurrentUser().getGenresTop().entrySet().stream()
                     .sorted(Map.Entry.<String, Integer>comparingByValue(compareByLikes))
                     .sorted(Map.Entry.<String, Integer>comparingByKey(compareByName))
-                    .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+                    .collect(Collectors.toMap(Map.Entry::getKey,
+                            Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
 
             Collections.sort(
                     UserLoggedIn.getInstance().getCurrentMovieList(),
@@ -173,11 +216,12 @@ public class Site {
 
             Set set = sortedMap.entrySet();
             Iterator iterator = set.iterator();
-            while(iterator.hasNext()) {
+            while (iterator.hasNext()) {
                 Map.Entry i = (Map.Entry) iterator.next();
                 for (Movie movie : UserLoggedIn.getInstance().getCurrentMovieList()) {
                     boolean ok = true;
-                    for (Movie seenMovie : UserLoggedIn.getInstance().getCurrentUser().getWatchedMovies()) {
+                    for (Movie seenMovie : UserLoggedIn.getInstance()
+                            .getCurrentUser().getWatchedMovies()) {
                         if (seenMovie.equals(movie)) {
                             ok = false;
                         }

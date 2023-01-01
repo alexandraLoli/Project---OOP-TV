@@ -10,9 +10,9 @@ import strategy.onPageStrategy.OnPageStrategy;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class FilterStrategy implements OnPageStrategy {
+public final class FilterStrategy implements OnPageStrategy {
     @Override
-    public OutputData onPage(ActionsInput actionsInput) {
+    public OutputData onPage(final ActionsInput actionsInput) {
         UserLoggedIn.getInstance().updateCurrentMovieList();
         if (actionsInput.getFilters().getContains() != null) {
             if (actionsInput.getFilters().getContains().getActors() != null) {
@@ -26,8 +26,7 @@ public class FilterStrategy implements OnPageStrategy {
             if (actionsInput.getFilters().getSort().getRating() != null) {
                 if (actionsInput.getFilters().getSort().getDuration() != null) {
                     filterByRatingAndDuration(actionsInput);
-                }
-                else {
+                } else {
                     filterByRating(actionsInput);
                 }
             } else {
@@ -41,7 +40,11 @@ public class FilterStrategy implements OnPageStrategy {
         );
     }
 
-    private void filterByActors(ActionsInput actionsInput) {
+    /**
+     * Filter movies by actors
+     * @param actionsInput
+     */
+    private void filterByActors(final ActionsInput actionsInput) {
         for (Movie movie : MoviesDataBase.getInstance().getMovies()) {
             int actorsToHave = 0;
             int actorsIHave = 0;
@@ -61,7 +64,11 @@ public class FilterStrategy implements OnPageStrategy {
         }
     }
 
-    public void filterByGenres(ActionsInput actionsInput) {
+    /**
+     * Filter movies by genre
+     * @param actionsInput
+     */
+    public void filterByGenres(final ActionsInput actionsInput) {
         for (Movie movie : MoviesDataBase.getInstance().getMovies()) {
             int genresToHave = 0;
             int genresIHave = 0;
@@ -81,7 +88,11 @@ public class FilterStrategy implements OnPageStrategy {
         }
     }
 
-    public void filterByRating(ActionsInput actionsInput) {
+    /**
+     * Filter movies by rating
+     * @param actionsInput
+     */
+    public void filterByRating(final ActionsInput actionsInput) {
         switch (actionsInput.getFilters().getSort().getRating()) {
             case "decreasing":
                 Collections.sort(
@@ -100,7 +111,11 @@ public class FilterStrategy implements OnPageStrategy {
         }
     }
 
-    public void filterByDuration(ActionsInput actionsInput) {
+    /**
+     * Filter movies by duration
+     * @param actionsInput
+     */
+    public void filterByDuration(final ActionsInput actionsInput) {
         switch (actionsInput.getFilters().getSort().getDuration()) {
             case "decreasing":
                 Collections.sort(
@@ -118,7 +133,11 @@ public class FilterStrategy implements OnPageStrategy {
         }
     }
 
-    public void filterByRatingAndDuration(ActionsInput actionsInput) {
+    /**
+     * Filter movies by rating and then by duration
+     * @param actionsInput
+     */
+    public void filterByRatingAndDuration(final ActionsInput actionsInput) {
         filterByRating(actionsInput);
         filterByDuration(actionsInput);
     }

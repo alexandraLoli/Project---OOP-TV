@@ -7,9 +7,9 @@ import fileio.output.OutputData;
 import site.UserLoggedIn;
 import strategy.onPageStrategy.OnPageStrategy;
 
-public class LoginStrategy implements OnPageStrategy {
+public final class LoginStrategy implements OnPageStrategy {
     @Override
-    public OutputData onPage(ActionsInput actionsInput) {
+    public OutputData onPage(final ActionsInput actionsInput) {
         String name = actionsInput.getCredentials().getName();
         String password = actionsInput.getCredentials().getPassword();
 

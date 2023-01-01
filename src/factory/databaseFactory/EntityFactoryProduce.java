@@ -2,11 +2,15 @@ package factory.databaseFactory;
 
 
 public class EntityFactoryProduce {
-    public static EntityFactory getFactory(String type) {
+    /**
+     * Return a specific factory to create an entity later
+     * @param type for factory type
+     * @return needed factory
+     */
+    public static EntityFactory getFactory(final String type) {
         if ("user".equals(type)) {
             return  new UserFactory();
-            }
-        else {
+        } else {
             return new MovieFactory();
         }
     }

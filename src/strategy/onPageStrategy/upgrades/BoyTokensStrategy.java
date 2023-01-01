@@ -5,9 +5,9 @@ import fileio.output.OutputData;
 import site.UserLoggedIn;
 import strategy.onPageStrategy.OnPageStrategy;
 
-public class BoyTokensStrategy implements OnPageStrategy {
+public final class BoyTokensStrategy implements OnPageStrategy {
     @Override
-    public OutputData onPage(ActionsInput actionsInput) {
+    public OutputData onPage(final ActionsInput actionsInput) {
         String myBalance = UserLoggedIn.getInstance().getCurrentUser().getCredentials()
                 .getBalance();
         Integer cost = actionsInput.getCount();

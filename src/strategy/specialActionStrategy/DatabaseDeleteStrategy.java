@@ -7,11 +7,10 @@ import entity.User;
 import fileio.input.ActionsInput;
 import fileio.output.OutputData;
 import observer.UsersToNotify;
-import site.UserLoggedIn;
 
-public class DatabaseDeleteStrategy implements SpecialActionStrategy{
+public final class DatabaseDeleteStrategy implements SpecialActionStrategy {
     @Override
-    public OutputData action(ActionsInput actionsInput) {
+    public OutputData action(final ActionsInput actionsInput) {
         String movieToDelete = actionsInput.getDeletedMovie();
         Movie movie = null;
         for (int i = 0; i < MoviesDataBase.getInstance().getMovies().size(); i++) {
@@ -29,7 +28,7 @@ public class DatabaseDeleteStrategy implements SpecialActionStrategy{
         }
     }
 
-    private void deleteMovie(Movie movie) {
+    private void deleteMovie(final Movie movie) {
         UsersToNotify usersToNotify = new UsersToNotify();
         for (User user : UsersDataBase.getInstance().getUsers()) {
             for (Movie moviePurchased : user.getPurchasedMovies()) {

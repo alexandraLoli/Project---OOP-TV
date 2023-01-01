@@ -7,9 +7,9 @@ import site.UserLoggedIn;
 
 import java.util.ArrayList;
 
-public class PageSeeDetailsStrategy implements ChangePageStrategy{
+public final class PageSeeDetailsStrategy implements ChangePageStrategy {
     @Override
-    public OutputData changePage(ActionsInput actionsInput) {
+    public OutputData changePage(final ActionsInput actionsInput) {
         for (Movie movie : UserLoggedIn.getInstance().getCurrentMovieList()) {
             if (movie.getName().equals(actionsInput.getMovie())) {
                 UserLoggedIn.getInstance().setCurrentMovie(movie);

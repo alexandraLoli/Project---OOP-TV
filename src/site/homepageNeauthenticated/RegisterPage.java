@@ -3,15 +3,13 @@ package site.homepageNeauthenticated;
 import fileio.input.ActionsInput;
 import fileio.output.OutputData;
 import site.Site;
-import site.UserLoggedIn;
-import strategy.onPageStrategy.OnPageStrategy;
 import strategy.onPageStrategy.register.RegisterStrategy;
 
 import java.util.ArrayList;
 
-public class RegisterPage extends Site {
+public final class RegisterPage extends Site {
 
-    public static RegisterPage instance;
+    private static RegisterPage instance;
 
     public RegisterPage() {
 
@@ -26,7 +24,9 @@ public class RegisterPage extends Site {
     }
 
     @Override
-    public void onPage(String feature, ActionsInput actionsInput, ArrayList<OutputData> outputData) {
+    public void onPage(final String feature,
+                       final ActionsInput actionsInput,
+                       final ArrayList<OutputData> outputData) {
         switch (feature) {
             case "register":
                 this.onPageStrategy = new RegisterStrategy();
@@ -41,12 +41,14 @@ public class RegisterPage extends Site {
     }
 
     @Override
-    public void back(ArrayList<OutputData> outputData, ActionsInput actionsInput) {
+    public void back(final ArrayList<OutputData> outputData,
+                     final ActionsInput actionsInput) {
         super.back(outputData, actionsInput);
     }
 
     @Override
-    public void subscribe(ArrayList<OutputData> outputData, ActionsInput actionsInput) {
+    public void subscribe(final ArrayList<OutputData> outputData,
+                          final ActionsInput actionsInput) {
         outputData.add(new OutputData());
     }
 }

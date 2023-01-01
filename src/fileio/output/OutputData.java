@@ -1,7 +1,6 @@
 package fileio.output;
 
 import entity.Movie;
-import entity.Notifications;
 import entity.User;
 import entity.UserCredentials;
 import site.UserLoggedIn;
@@ -21,7 +20,7 @@ public final class OutputData {
 
     public OutputData(final User currentUser) {
         this.error = null;
-        this.currentUser = setUser(currentUser);
+        this.currentUser = setUser();
         this.currentMoviesList = null;
     }
 
@@ -29,7 +28,7 @@ public final class OutputData {
                       final User currentUser,
                       final ArrayList<Movie> currentMoviesList) {
         this.error = error;
-        this.currentUser = setUser(currentUser);
+        this.currentUser = setUser();
         this.currentMoviesList = setMovieList(currentMoviesList);
     }
 
@@ -46,7 +45,7 @@ public final class OutputData {
     }
 
     /**
-     *
+     * Set the movie list for output
      * @param movieList
      * @return
      */
@@ -70,7 +69,11 @@ public final class OutputData {
         return list;
     }
 
-    public OutputUser setUser (final User user) {
+    /**
+     * Set the user for output
+     * @return
+     */
+    public OutputUser setUser() {
         return new OutputUser(
                 new UserCredentials(
                         UserLoggedIn.getInstance().getCurrentUser()
