@@ -11,7 +11,11 @@ public final class WatchStrategy implements OnPageStrategy {
     public OutputData onPage(final ActionsInput actionsInput) {
         for (Movie movie : UserLoggedIn.getInstance().getCurrentUser().getWatchedMovies()) {
             if (UserLoggedIn.getInstance().getCurrentMovie().getName().equals(movie.getName())) {
-                return null;
+                return new OutputData(
+                        null,
+                        UserLoggedIn.getInstance().getCurrentUser(),
+                        UserLoggedIn.getInstance().getCurrentMovieList()
+                );
             }
         }
         for (Movie movie : UserLoggedIn.getInstance().getCurrentUser().getPurchasedMovies()) {

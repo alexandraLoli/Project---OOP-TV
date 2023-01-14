@@ -11,7 +11,7 @@ import strategy.onPageStrategy.seeDetails.LikeStrategy;
 import strategy.onPageStrategy.seeDetails.PurchaseStrategy;
 import strategy.onPageStrategy.seeDetails.RateStrategy;
 import strategy.onPageStrategy.seeDetails.WatchStrategy;
-import strategy.specialActionStrategy.SubscribeStrategy;
+import strategy.onPageStrategy.seeDetails.SubscribeStrategy;
 
 import java.util.ArrayList;
 
@@ -47,6 +47,9 @@ public final class SeeDetailsPage extends Site {
                 break;
             case "rate":
                 this.onPageStrategy = new RateStrategy();
+                break;
+            case "subscribe":
+                this.onPageStrategy = new SubscribeStrategy();
                 break;
             default:
                 this.onPageStrategy = null;
@@ -98,13 +101,4 @@ public final class SeeDetailsPage extends Site {
         super.back(outputData, actionsInput);
     }
 
-    @Override
-    public void subscribe(final ArrayList<OutputData> outputData,
-                          final ActionsInput actionsInput) {
-        this.specialActionStrategy = new SubscribeStrategy();
-        OutputData output = this.specialActionStrategy.action(actionsInput);
-        if (output != null) {
-            outputData.add(output);
-        }
-    }
 }

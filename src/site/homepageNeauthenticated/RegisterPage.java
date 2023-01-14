@@ -46,9 +46,4 @@ public final class RegisterPage extends Site {
         super.back(outputData, actionsInput);
     }
 
-    @Override
-    public void subscribe(final ArrayList<OutputData> outputData,
-                          final ActionsInput actionsInput) {
-        outputData.add(new OutputData());
-    }
 }

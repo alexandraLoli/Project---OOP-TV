@@ -42,6 +42,7 @@ public class Main {
 
         ObjectWriter objectWriter = objectMapper.writer(new DefaultPrettyPrinter());
         try {
+            File output = new File(inputPath + "out");
             objectWriter.writeValue(outputFile, outputData);
         } catch (IOException exception) {
             exception.printStackTrace();

@@ -1,4 +1,4 @@
-package strategy.specialActionStrategy;
+package strategy.databaseStrategy;
 
 import database.MoviesDataBase;
 import database.UsersDataBase;
@@ -8,7 +8,7 @@ import fileio.input.ActionsInput;
 import fileio.output.OutputData;
 import observer.UsersToNotify;
 
-public final class DatabaseDeleteStrategy implements SpecialActionStrategy {
+public final class DatabaseDeleteStrategy implements DatabaseStrategy {
     @Override
     public OutputData action(final ActionsInput actionsInput) {
         String movieToDelete = actionsInput.getDeletedMovie();

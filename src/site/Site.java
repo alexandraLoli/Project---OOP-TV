@@ -7,9 +7,9 @@ import fileio.input.InputData;
 import fileio.output.OutputData;
 import strategy.changePageStrategy.*;
 import strategy.onPageStrategy.OnPageStrategy;
-import strategy.specialActionStrategy.DatabaseAddStrategy;
-import strategy.specialActionStrategy.DatabaseDeleteStrategy;
-import strategy.specialActionStrategy.SpecialActionStrategy;
+import strategy.databaseStrategy.DatabaseAddStrategy;
+import strategy.databaseStrategy.DatabaseDeleteStrategy;
+import strategy.databaseStrategy.DatabaseStrategy;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -18,7 +18,7 @@ public class Site {
 
     public ChangePageStrategy changePageStrategy;
     public OnPageStrategy onPageStrategy;
-    public SpecialActionStrategy specialActionStrategy;
+    public DatabaseStrategy databaseStrategy;
 
     /**
      * Verify each action and call the corresponding method
@@ -43,11 +43,6 @@ public class Site {
                     SiteFactoryProduce.getFactory(
                             UserLoggedIn.getInstance().getCurrentPage()
                     ).getPage().back(outputData, actionsInput);
-                    break;
-                case "subscribe":
-                    SiteFactoryProduce.getFactory(
-                            UserLoggedIn.getInstance().getCurrentPage()
-                    ).getPage().subscribe(outputData, actionsInput);
                     break;
                 case "database":
                     SiteFactoryProduce.getFactory(
@@ -140,15 +135,6 @@ public class Site {
         }
     }
 
-    /**
-     * Method used to subscribe to a genre
-     * @param outputData
-     * @param actionsInput
-     */
-    public void subscribe(final ArrayList<OutputData> outputData,
-                           final ActionsInput actionsInput) {
-
-    }
 
     /**
      * Method used to add or delete movies from Database
@@ -159,15 +145,15 @@ public class Site {
                          final ActionsInput actionsInput) {
         switch (actionsInput.getFeature()) {
             case "add":
-                this.specialActionStrategy = new DatabaseAddStrategy();
+                this.databaseStrategy = new DatabaseAddStrategy();
                 break;
             case "delete":
-                this.specialActionStrategy = new DatabaseDeleteStrategy();
+                this.databaseStrategy = new DatabaseDeleteStrategy();
                 break;
             default:
-                this.specialActionStrategy = null;
+                this.databaseStrategy = null;
         }
-        OutputData output = this.specialActionStrategy.action(actionsInput);
+        OutputData output = this.databaseStrategy.action(actionsInput);
         if (output != null) {
             outputData.add(output);
         }

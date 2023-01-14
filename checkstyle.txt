@@ -12,7 +12,7 @@ Starting audit...
 [ERROR] D:\descarcari\oop-asignments-master\proiect2\.\src\site\Site.java:14:17: Using the '.*' form of import should be avoided - java.util.*. [AvoidStarImport]
 [ERROR] D:\descarcari\oop-asignments-master\proiect2\.\src\site\Site.java:19:31: Variable 'changePageStrategy' must be private and have accessor methods. [VisibilityModifier]
 [ERROR] D:\descarcari\oop-asignments-master\proiect2\.\src\site\Site.java:20:27: Variable 'onPageStrategy' must be private and have accessor methods. [VisibilityModifier]
-[ERROR] D:\descarcari\oop-asignments-master\proiect2\.\src\site\Site.java:21:34: Variable 'specialActionStrategy' must be private and have accessor methods. [VisibilityModifier]
+[ERROR] D:\descarcari\oop-asignments-master\proiect2\.\src\site\Site.java:21:29: Variable 'databaseStrategy' must be private and have accessor methods. [VisibilityModifier]
 [ERROR] D:\descarcari\oop-asignments-master\proiect2\.\src\strategy\onPageStrategy\register\RegisterStrategy.java:29:17: '15' is a magic number. [MagicNumber]
 [ERROR] D:\descarcari\oop-asignments-master\proiect2\.\src\strategy\onPageStrategy\seeDetails\RateStrategy.java:30:39: '5' is a magic number. [MagicNumber]
 [ERROR] D:\descarcari\oop-asignments-master\proiect2\.\src\strategy\onPageStrategy\upgrades\BuyPremiumAccountStrategy.java:12:25: '10' is a magic number. [MagicNumber]

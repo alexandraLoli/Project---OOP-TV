@@ -1,4 +1,4 @@
-package strategy.specialActionStrategy;
+package strategy.databaseStrategy;
 
 import database.MoviesDataBase;
 import database.UsersDataBase;
@@ -10,7 +10,7 @@ import fileio.input.MovieInput;
 import fileio.output.OutputData;
 import observer.UsersToNotify;
 
-public final class DatabaseAddStrategy implements SpecialActionStrategy {
+public final class DatabaseAddStrategy implements DatabaseStrategy {
     @Override
     public OutputData action(final ActionsInput actionsInput) {
         MovieInput movieToAdd = actionsInput.getAddedMovie();

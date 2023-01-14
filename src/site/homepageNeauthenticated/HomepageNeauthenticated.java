@@ -58,10 +58,4 @@ public final class HomepageNeauthenticated extends Site {
                      final ActionsInput actionsInput) {
         super.back(outputData, actionsInput);
     }
-
-    @Override
-    public void subscribe(final ArrayList<OutputData> outputData,
-                          final ActionsInput actionsInput) {
-        outputData.add(new OutputData());
-    }
 }
